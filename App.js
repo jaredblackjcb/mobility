@@ -1,19 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import Header from './components/header';
 
 export default function App() {
   return (
     <View style={styles.container}>
-    <View style={styles.imageContainer}>
+      <Header />
+      <View style={styles.imageContainer}>
         <ImageBackground source={require('./assets/home_screen/home1.jpg')} resizeMode='cover' style={styles.image}>
           <Text style={styles.h1Text}>Full Body Mobility</Text>
         </ImageBackground>
         <ImageBackground source={require('./assets/home_screen/home2.jpeg')} resizeMode='cover' style={styles.image}>
           <Text style={styles.h1Text}>Focused Mobility</Text>
         </ImageBackground>
-
-    </View>
+      </View>
     </View>
   );
 }
@@ -25,9 +26,9 @@ const styles = StyleSheet.create({
 
   },
   imageContainer: {
-    marginTop: 200,
-    flex: .6
-
+    marginTop: 30,
+    flex: .65,
+    marginBottom: 120
   },
   image: {
     flex: .5,
