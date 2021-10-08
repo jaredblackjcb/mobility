@@ -1,46 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import Header from './components/Header';
-import RadioButtonDuration from './components/RadioButtonDuration';
+import HomeScreen from './screens/HomeScreen';
+import SelectFocusScreen from './screens/SelectFocusScreen';
+import WorkoutScreen from './screens/WorkoutScreen';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.imageContainer}>
-        <ImageBackground source={require('./assets/home_screen/home1.jpg')} resizeMode='cover' style={styles.image}>
-          <Text style={styles.h1Text}>Full Body Mobility</Text>
-        </ImageBackground>
-        <ImageBackground source={require('./assets/home_screen/home2.jpeg')} resizeMode='cover' style={styles.image}>
-          <Text style={styles.h1Text}>Focused Mobility</Text>
-        </ImageBackground>
-        <RadioButtonDuration />
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#00A0F3',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Mobility Home" }}
+        />
+        <Stack.Screen
+          name="SelectFocus"
+          component={SelectFocusScreen}
+          options={{ title: "Select Focus" }}
+        />
+        <Stack.Screen
+          name="Workout"
+          component={WorkoutScreen}
+          options={{ title: "Workout" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#384955',
-
-  },
-  imageContainer: {
-    marginTop: 30,
-    flex: 1,
-    marginBottom: 150
-  },
-  image: {
-    flex: .5,
-    marginTop: 15,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  h1Text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#384955',
-  }
-});

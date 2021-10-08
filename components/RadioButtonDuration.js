@@ -17,7 +17,7 @@ export default class RadioButtonDuration extends Component {
         return (
             <View style={styles.container}>
                 {
-                    this.state.durationOptions.map((minutes, index) => {lolllll
+                    this.state.durationOptions.map((minutes, index) => {
                         return (
                             <TouchableOpacity onPress={() => {
                                 const durationState = this.state.durationOptions;
