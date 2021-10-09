@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function SelectFocusScreen() {
+export default function SelectCategoryScreen() {
     return (
       <View style={styles.container}>
         <Text>Workout Screen!</Text>

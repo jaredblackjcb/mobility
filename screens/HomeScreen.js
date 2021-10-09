@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RadioButtonDuration from '../components/RadioButtonDuration';
 
 export default function HomeScreen({navigation}) {
@@ -13,7 +11,7 @@ export default function HomeScreen({navigation}) {
             <Text style={styles.h1Text}>Full Body Mobility</Text>
           </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('SelectFocus')}} style={styles.imageTouchable}>
+        <TouchableOpacity onPress={() => {navigation.navigate('SelectCategory')}} style={styles.imageTouchable}>
           <ImageBackground source={require('../assets/home_screen/home2.jpeg')} resizeMode='cover' style={styles.image}>
             <Text style={styles.h1Text}>Focused Mobility</Text>
           </ImageBackground>
