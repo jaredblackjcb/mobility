@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeScreen from './screens/HomeScreen';
-import SelectFocusScreen from './screens/SelectFocusScreen';
+import SelectCategoryScreen from './screens/SelectCategoryScreen';
 import WorkoutScreen from './screens/WorkoutScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -30,9 +30,9 @@ export default function App() {
           options={{ title: "Mobility Home" }}
         />
         <Stack.Screen
-          name="SelectFocus"
-          component={SelectFocusScreen}
-          options={{ title: "Select Focus" }}
+          name="SelectCategory"
+          component={SelectCategoryScreen}
+          options={{ title: "Select Category" }}
         />
         <Stack.Screen
           name="Workout"
