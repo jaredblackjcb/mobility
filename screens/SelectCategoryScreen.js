@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, Button } from 'react-native';
-import { WORKOUT_CATEGORIES } from '../data/category-data';
+import { WORKOUT_CATEGORIES } from '../data/app-data';
 import Colors from '../constants/Colors';
 
 

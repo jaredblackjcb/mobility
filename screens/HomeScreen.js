@@ -8,12 +8,12 @@ export default function HomeScreen({navigation}) {
         <View style={styles.imageContainer}>
         <TouchableOpacity onPress={() => {navigation.navigate('Workout')}} style={styles.imageTouchable}>
           <ImageBackground source={require('../assets/home_screen/home1.jpg')} resizeMode='cover' style={styles.image}>
-            <Text style={styles.h1Text}>Full Body Mobility</Text>
+            <Text style={styles.h1Text}>Full Body Session</Text>
           </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {navigation.navigate('SelectCategory')}} style={styles.imageTouchable}>
           <ImageBackground source={require('../assets/home_screen/home2.jpeg')} resizeMode='cover' style={styles.image}>
-            <Text style={styles.h1Text}>Focused Mobility</Text>
+            <Text style={styles.h1Text}>Focused Session</Text>
           </ImageBackground>
         </TouchableOpacity>
           <RadioButtonDuration />
