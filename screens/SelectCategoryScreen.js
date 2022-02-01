@@ -58,7 +58,7 @@ export default function SelectCategoryScreen({ navigation }) {
         numColumns={2}
       />
 
-      <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate('Workout', {'categoryIDs': selectedIDs})}>
+      <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate('Workout', {categoryIDs: selectedIDs})}>
         <Text style={styles.buttonTitle}>Start Session</Text>
       </TouchableOpacity>
       {/* <View style={styles.startButton}>
