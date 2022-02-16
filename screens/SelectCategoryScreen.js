@@ -7,6 +7,43 @@ import Colors from '../constants/Colors';
 
 export default function SelectCategoryScreen({ navigation }) {
 
+  const [selectedIDs, setSelectedIDs] = useState([]);
+  const [checkboxState, setCheckboxState] = useState({ 100: false, 101: false, 102: false, 103: false, 104: false, 105: false, 106: false });
+
+  const Item = ({ categoryName, categoryID }) => {
+    return (
+      <TouchableOpacity style={[styles.gridItem, checkboxState[categoryID] ? { backgroundColor: Colors.completeColor } : { backgroundColor: Colors.primaryColor }]}
+        onPress={() => addIDHandler(categoryID)}>
+        <Text style={styles.gridItemLabel}>{categoryName}</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const addIDHandler = id => {
+    let allSelectedIDs = selectedIDs;
+    let newCheckboxState;
+    // If box is not currently selected and there are 3 or less boxes selected, turn box green and add id to the selected state 
+    if (allSelectedIDs.length < 3 && !allSelectedIDs.includes(id)) {
+      allSelectedIDs.push(id);
+      setSelectedIDs(allSelectedIDs);
+      newCheckboxState = { ...checkboxState, [id]: true };
+      setCheckboxState(newCheckboxState);
+      console.log(allSelectedIDs);
+      console.log(newCheckboxState);
+    } else {
+      allSelectedIDs = allSelectedIDs.filter(item => item != id);
+      setSelectedIDs(allSelectedIDs);
+      newCheckboxState = { ...checkboxState, [id]: false };
+      setCheckboxState(newCheckboxState);
+      console.log(allSelectedIDs);
+      console.log(newCheckboxState);
+    }
+// You can't set and use the state within the same {}. It is asynchronous so it will maintain its original state until after the function has executed.
+  }
+
+  const renderItem = ({ item }) => (
+    <Item categoryName={item.categoryName} categoryID={item.id} />
+  );
 
   return (
     <View style={styles.container} >
@@ -15,10 +52,11 @@ export default function SelectCategoryScreen({ navigation }) {
         contentContainerStyle={styles.gridContainer}
         data={WORKOUT_CATEGORIES}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => item.id}
         numColumns={2}
       />
-      <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate('Workout')}>
+
+      <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate('Workout', {categoryIDs: selectedIDs})}>
         <Text style={styles.buttonTitle}>Start Session</Text>
       </TouchableOpacity>
       {/* <View style={styles.startButton}>
@@ -28,17 +66,6 @@ export default function SelectCategoryScreen({ navigation }) {
   );
 }
 
-const Item = ({ categoryName }) => {
-  return (
-    <TouchableOpacity style={styles.gridItem}>
-      <Text style={styles.gridItemLabel}>{categoryName}</Text>
-    </TouchableOpacity>
-  );
-};
-
-const renderItem = ({ item }) => (
-  <Item categoryName={item.categoryName} />
-);
 
 //Define grid item dimensions
 const { width, height } = Dimensions.get('window');
@@ -64,7 +91,6 @@ const styles = StyleSheet.create({
     // backgroundColor: '#fff'
   },
   gridItem: {
-    backgroundColor: Colors.primaryColor,
     marginVertical: 8,
     borderRadius: 5,
     width: itemWidth,
