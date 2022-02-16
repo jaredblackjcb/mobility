@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
+import DurationSelector from '../components/DurationSelector';
 import RadioButtonDuration from '../components/RadioButtonDuration';
 import { WORKOUT_CATEGORIES } from '../data/app-data';
 
 
 export default function HomeScreen({navigation}) {
+  const [duration, setDuration] = useState(10);
   const selectedIDs = () => {
     let catIDs = [];
     for (let category of WORKOUT_CATEGORIES) {
@@ -21,6 +23,10 @@ export default function HomeScreen({navigation}) {
     return selected;
   }
 
+  function changeDurationState(newDuration) {
+    setDuration(newDuration);
+  }
+
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
@@ -34,7 +40,7 @@ export default function HomeScreen({navigation}) {
             <Text style={styles.h1Text}>Focused Session</Text>
           </ImageBackground>
         </TouchableOpacity>
-          <RadioButtonDuration />
+          <RadioButtonDuration selectedDuration={duration} changeDurationState={changeDurationState}/>
         </View>
       </View>
     );

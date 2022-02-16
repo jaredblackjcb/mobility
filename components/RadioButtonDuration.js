@@ -13,7 +13,11 @@ export default class RadioButtonDuration extends Component {
         }
     }
 
+    
     render() {
+        function changeState(newDuration) {
+            this.state.durationOptions = this.props.changeDurationState(newDuration);
+        }
         return (
             <View style={styles.container}>
                 {
@@ -24,7 +28,7 @@ export default class RadioButtonDuration extends Component {
                                 if (durationState.some(minutes => { if (minutes.selected) return true})) {
                                     const selectedIndex = durationState.findIndex(minutes => minutes.selected == true);
                                     if (selectedIndex == index) {
-                                        durationState[selectedIndex].selected = false;
+                                        durationState[selectedIndex].selected = true;
                                     } else {
                                         durationState[selectedIndex].selected = false;
                                         durationState[index].selected = !durationState[index].selected;
