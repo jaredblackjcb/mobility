@@ -1,13 +1,8 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Accordion from '../components/Accordion';
 import { EXERCISES } from '../data/app-data';
 import Colors from '../constants/Colors';
-import Exercise from '../models/Exercise';
-
-// const categoryIds = props.navigation.getParam('categoryIds');
-// const selectedExercises = EXERCISES.find(exercise => exercise.categoryIds = categoryIds); //TODO: Just an example. Need to figure out how to select 3-5 exercises that have selected categoryIds from the selection screen in their categoryId list
-
 
 export default function WorkoutScreen({route, navigation}) {
   const categoryIDs = route.params.categoryIDs;
@@ -22,11 +17,11 @@ export default function WorkoutScreen({route, navigation}) {
           filteredExercises.push(exercise);
         }
       }
-      console.log(ids);
+      // console.log(ids);
       }
-    for (let i = 0; i < catIDs.length; i++) {
-      console.log(catIDs[i]);
-    }
+    // for (let i = 0; i < catIDs.length; i++) {
+      // console.log(catIDs[i]);
+    // }
     return filteredExercises;
   }
 
@@ -35,6 +30,9 @@ export default function WorkoutScreen({route, navigation}) {
       <View style={styles.container}>
       <ScrollView>
           {renderAccordions(filteredExercises(categoryIDs))}
+          <TouchableOpacity style={styles.endButton} onPress={() => {navigation.navigate('Home')}}>
+            <Text style={styles.buttonTitle}>Finish</Text>
+          </TouchableOpacity>
       </ScrollView>
         </View>
     );
@@ -59,5 +57,19 @@ export default function WorkoutScreen({route, navigation}) {
         flex: 1,
         paddingTop: 30,
         backgroundColor: Colors.backgroundColor
+      },
+      endButton: {
+        marginTop: 50,
+        marginBottom: 50,
+        marginHorizontal: 80,
+        height: 45,
+        borderRadius: 3,
+        backgroundColor: Colors.completeColor,
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      buttonTitle: {
+        fontSize: 18,
+        color: '#fff'
       }
   });

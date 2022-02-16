@@ -28,7 +28,6 @@ export default function SelectCategoryScreen({ navigation }) {
       setSelectedIDs(allSelectedIDs);
       newCheckboxState = { ...checkboxState, [id]: true };
       setCheckboxState(newCheckboxState);
-      console.log("select")
       console.log(allSelectedIDs);
       console.log(newCheckboxState);
     } else {
@@ -36,7 +35,6 @@ export default function SelectCategoryScreen({ navigation }) {
       setSelectedIDs(allSelectedIDs);
       newCheckboxState = { ...checkboxState, [id]: false };
       setCheckboxState(newCheckboxState);
-      console.log("deselect");
       console.log(allSelectedIDs);
       console.log(newCheckboxState);
     }
@@ -54,7 +52,7 @@ export default function SelectCategoryScreen({ navigation }) {
         contentContainerStyle={styles.gridContainer}
         data={WORKOUT_CATEGORIES}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => item.id}
         numColumns={2}
       />
 
