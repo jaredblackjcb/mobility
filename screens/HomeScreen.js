@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
-import RadioButtonDuration from '../components/RadioButtonDuration';
 import { WORKOUT_CATEGORIES } from '../data/app-data';
 
 
@@ -34,7 +33,6 @@ export default function HomeScreen({navigation}) {
             <Text style={styles.h1Text}>Focused Session</Text>
           </ImageBackground>
         </TouchableOpacity>
-          <RadioButtonDuration />
         </View>
       </View>
     );
