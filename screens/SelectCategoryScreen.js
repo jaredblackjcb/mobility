@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, Button } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, Platform, ToastAndroid } from 'react-native';
 import { WORKOUT_CATEGORIES } from '../data/app-data';
 import Colors from '../constants/Colors';
 
@@ -9,6 +9,7 @@ export default function SelectCategoryScreen({ navigation }) {
 
   const [selectedIDs, setSelectedIDs] = useState([]);
   const [checkboxState, setCheckboxState] = useState({ 100: false, 101: false, 102: false, 103: false, 104: false, 105: false, 106: false });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const Item = ({ categoryName, categoryID }) => {
     return (
@@ -20,6 +21,7 @@ export default function SelectCategoryScreen({ navigation }) {
   };
 
   const addIDHandler = id => {
+    setErrorMessage('');
     let allSelectedIDs = selectedIDs;
     let newCheckboxState;
     // If box is not currently selected and there are 3 or less boxes selected, turn box green and add id to the selected state 
@@ -45,6 +47,24 @@ export default function SelectCategoryScreen({ navigation }) {
     <Item categoryName={item.categoryName} categoryID={item.id} />
   );
 
+  function startSessionNullHandler() {
+    if (Platform.OS === 'android') {
+      ToastAndroid.show("Please select at least one category.",
+      ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+    } else {
+      setErrorMessage("Please select at least one category.");
+    }
+  }
+
+  const renderError = () => {
+    if (errorMessage) {
+      return (
+        <View style={styles.errorMessageContainer}>
+          <Text style={styles.errorMessageText}>{errorMessage}</Text>
+        </View>);
+    }
+  }
+
   return (
     <View style={styles.container} >
       <Text style={styles.h1}>Select up to 3 focus areas:</Text>
@@ -55,8 +75,9 @@ export default function SelectCategoryScreen({ navigation }) {
         keyExtractor={(item, index) => item.id}
         numColumns={2}
       />
+      {renderError()}
 
-      <TouchableOpacity style={styles.startButton} onPress={() => navigation.navigate('Workout', {categoryIDs: selectedIDs})}>
+      <TouchableOpacity style={styles.startButton} onPress={ () => selectedIDs.length > 0 ? navigation.navigate('Workout', {categoryIDs: selectedIDs}) : startSessionNullHandler()}>
         <Text style={styles.buttonTitle}>Start Session</Text>
       </TouchableOpacity>
       {/* <View style={styles.startButton}>
@@ -115,5 +136,15 @@ const styles = StyleSheet.create({
   buttonTitle: {
     fontSize: 18,
     color: '#fff'
+  },
+  errorMessageContainer: {
+    flex: 1,
+    alignContent: 'center',
+    alignItems: 'center'
+  },
+  errorMessageText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16
   }
 });
