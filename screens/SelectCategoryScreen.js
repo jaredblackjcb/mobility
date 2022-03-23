@@ -21,10 +21,10 @@ export default function SelectCategoryScreen({ navigation }) {
   };
 
   const addIDHandler = id => {
-    setErrorMessage('');
     let allSelectedIDs = selectedIDs;
     let newCheckboxState;
     // If box is not currently selected and there are 3 or less boxes selected, turn box green and add id to the selected state 
+    console.log("numSelectedIds: " + allSelectedIDs.length);
     if (allSelectedIDs.length < 3 && !allSelectedIDs.includes(id)) {
       allSelectedIDs.push(id);
       setSelectedIDs(allSelectedIDs);
@@ -33,16 +33,29 @@ export default function SelectCategoryScreen({ navigation }) {
       console.log(allSelectedIDs);
       console.log(newCheckboxState);
     } else {
-      allSelectedIDs = allSelectedIDs.filter(item => item != id);
-      setSelectedIDs(allSelectedIDs);
-      newCheckboxState = { ...checkboxState, [id]: false };
-      setCheckboxState(newCheckboxState);
-      console.log(allSelectedIDs);
-      console.log(newCheckboxState);
+      // Deselect the category
+      if (allSelectedIDs.includes(id)){
+        allSelectedIDs = allSelectedIDs.filter(item => item != id);
+        setSelectedIDs(allSelectedIDs);
+        newCheckboxState = { ...checkboxState, [id]: false };
+        setCheckboxState(newCheckboxState);
+        console.log(allSelectedIDs);
+        console.log(newCheckboxState);
+      }
+      //Error message handling for attempting to select a 4th box
+      if (allSelectedIDs.length === 3) {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show("Only 3 categories can be selected.", ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+        } else {
+          setErrorMessage("Only 3 categories can be selected.");
+        }
+      } else {
+        setErrorMessage('');
+      }
     }
-// You can't set and use the state within the same {}. It is asynchronous so it will maintain its original state until after the function has executed.
+    // You can't set and use the state within the same {}. It is asynchronous so it will maintain its original state until after the function has executed.
   }
-
+  
   const renderItem = ({ item }) => (
     <Item categoryName={item.categoryName} categoryID={item.id} />
   );
@@ -67,7 +80,7 @@ export default function SelectCategoryScreen({ navigation }) {
 
   return (
     <View style={styles.container} >
-      <Text style={styles.h1}>Select up to 3 focus areas:</Text>
+      <Text style={styles.h1}>Select up to 3 categories:</Text>
       <FlatList
         contentContainerStyle={styles.gridContainer}
         data={WORKOUT_CATEGORIES}
@@ -80,9 +93,6 @@ export default function SelectCategoryScreen({ navigation }) {
       <TouchableOpacity style={styles.startButton} onPress={ () => selectedIDs.length > 0 ? navigation.navigate('Workout', {categoryIDs: selectedIDs}) : startSessionNullHandler()}>
         <Text style={styles.buttonTitle}>Start Session</Text>
       </TouchableOpacity>
-      {/* <View style={styles.startButton}>
-        <Button title="Start Session" onPress={() => navigation.navigate('Workout')}></Button>
-      </View> */}
     </View>
   );
 }
