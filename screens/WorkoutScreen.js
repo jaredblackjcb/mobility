@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import ExerciseAccordion from '../components/ExerciseAccordion';
 import { EXERCISES } from '../data/app-data';
 import Colors from '../constants/Colors';
@@ -39,21 +39,6 @@ export default function WorkoutScreen({ route, navigation }) {
     </View>
   );
 }
-
-// const renderAccordions = (data) => {
-//   const accordions = [];
-//   for (let item of data) {
-//     accordions.push(
-//       <Accordion
-//         key={item.id}
-//         title={item.title}
-//         description={item.description}
-//         imagePath={item.imagePath}
-//       />
-//     )
-//   }
-//   return accordions;
-// }
 
 const styles = StyleSheet.create({
   container: {
