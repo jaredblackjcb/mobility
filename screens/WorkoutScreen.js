@@ -1,57 +1,43 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Accordion from '../components/Accordion';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import ExerciseAccordion from '../components/ExerciseAccordion';
 import { EXERCISES } from '../data/app-data';
 import Colors from '../constants/Colors';
 
 export default function WorkoutScreen({ route, navigation }) {
   const categoryIDs = route.params.categoryIDs;
+  const [selectedExercises, setSelectedExercises] = useState(filterExercises(categoryIDs));
+  const [expandedId, setExpandedId] = useState(selectedExercises[0].id);
 
   // Return 3 exercises. Include at least one exercise from each category contained in catIDs. 
-  const filteredExercises = catIDs => {
-    let selectedExercises = [];
+  function filterExercises(catIDs) {
+    let exercises = [];
     // console.log("catIDs: " + catIDs);
-    while (selectedExercises.length < 3) {
+    while (exercises.length < 3) {
       for (let catID of catIDs) {
         const categoryExercises = EXERCISES.filter(exercise => exercise.categoryIds.categoryIDs.includes(catID));
         const selectedExercise = categoryExercises[Math.floor(Math.random() * categoryExercises.length)];
         // console.log("selectedExercise: " + JSON.stringify(selectedExercise.categoryIds));
         // console.log("catID: " + catID);
-        if (selectedExercises.length < 3 && !selectedExercises.includes(selectedExercise)) {
-          selectedExercises.push(selectedExercise);
+        if (exercises.length < 3 && !exercises.includes(selectedExercise)) {
+          exercises.push(selectedExercise);
         }
         // console.log("selectedExercises: " + JSON.stringify(selectedExercises));
       }
     }
-    return selectedExercises;
+    // setExpandedId(exercises[0].id);
+    return exercises;
   }
 
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {renderAccordions(filteredExercises(categoryIDs))}
+        <ExerciseAccordion selectedExercises={selectedExercises} expandedId={expandedId} setExpandedId={setExpandedId} />
         <TouchableOpacity style={styles.endButton} onPress={() => { navigation.navigate('Home') }}>
           <Text style={styles.buttonTitle}>Finish</Text>
         </TouchableOpacity>
-      </ScrollView>
     </View>
   );
-}
-
-const renderAccordions = (data) => {
-  const accordions = [];
-  for (let item of data) {
-    accordions.push(
-      <Accordion
-        key={item.id}
-        title={item.title}
-        description={item.description}
-        imagePath={item.imagePath}
-      />
-    )
-  }
-  return accordions;
 }
 
 const styles = StyleSheet.create({
