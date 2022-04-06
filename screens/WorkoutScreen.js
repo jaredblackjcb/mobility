@@ -90,5 +90,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 75
   },
 });
