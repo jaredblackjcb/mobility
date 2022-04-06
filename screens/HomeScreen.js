@@ -25,12 +25,14 @@ export default function HomeScreen({navigation}) {
         <View style={styles.imageContainer}>
         <TouchableOpacity onPress={() => {navigation.navigate('Workout', {categoryIDs: selectedIDs()})}} style={styles.imageTouchable}>
           <ImageBackground source={require('../assets/home_screen/home1.jpg')} resizeMode='cover' style={styles.image}>
-            <Text style={styles.h1Text}>Quick Start</Text>
+            <Text style={styles.h1Text}>5-Minute Quick Start</Text>
+            <Text style={styles.h2Text}>Start training instantly with exercises chosen for you</Text>
           </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {navigation.navigate('SelectCategory')}} style={styles.imageTouchable}>
           <ImageBackground source={require('../assets/home_screen/home2.jpeg')} resizeMode='cover' style={styles.image}>
             <Text style={styles.h1Text}>Custom Session</Text>
+            <Text style={styles.h2Text}>Select specific target areas to work on</Text>
           </ImageBackground>
         </TouchableOpacity>
         </View>
@@ -51,16 +53,24 @@ export default function HomeScreen({navigation}) {
     },
     image: {
       flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'center'
+      justifyContent: 'flex-end',
+      alignItems: 'flex-start'
     },
     imageTouchable: {
         flex: .5,
         marginTop: 15,
     },
     h1Text: {
-      fontSize: 24,
+      fontSize: 30,
       fontWeight: 'bold',
       color: '#384955',
+      paddingLeft: 10,
+    },
+    h2Text: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#384955',
+      paddingLeft: 10,
+      paddingBottom: 10
     }
   });
