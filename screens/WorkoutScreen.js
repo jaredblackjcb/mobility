@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-// import { verticalScale, scale } from "react-native-size-matters";
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
 import ExerciseAccordion from "../components/ExerciseAccordion";
 import { EXERCISES } from "../data/app-data";
@@ -30,7 +23,7 @@ export default function WorkoutScreen({ route, navigation }) {
         );
         const selectedExercise =
           categoryExercises[
-            Math.floor(Math.random() * categoryExercises.length)
+          Math.floor(Math.random() * categoryExercises.length)
           ];
         // console.log("selectedExercise: " + JSON.stringify(selectedExercise.categoryIds));
         // console.log("catID: " + catID);

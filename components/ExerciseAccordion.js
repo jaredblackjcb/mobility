@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  Dimensions,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from "react-native";
 import Colors from "../constants/Colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -52,11 +45,7 @@ const ExerciseAccordion = (props) => {
           >
             <Text style={[styles.title, styles.font]}>{item.title}</Text>
             <Icon
-              name={
-                item.id === props.expandedId
-                  ? "keyboard-arrow-up"
-                  : "keyboard-arrow-down"
-              }
+              name={item.id === props.expandedId ? "keyboard-arrow-up" : "keyboard-arrow-down"}
               size={30}
               color={Colors.white}
             />
