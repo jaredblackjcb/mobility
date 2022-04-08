@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from "react-native";
+
+import VideoPlayer from "./VideoPlayer";
+
 import Colors from "../constants/Colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -53,7 +56,11 @@ const ExerciseAccordion = (props) => {
           <View style={styles.parentHr} />
           {item.id === props.expandedId && (
             <View style={styles.child}>
-              {resizedImage(item.imagePath)}
+              {/* {resizedImage(item.thumbnailPath)} */}
+              <View style={styles.videoPlayerHolder}>
+              <VideoPlayer videoPath={item.videoPath}
+                thumbnailPath={item.thumbnailPath} />
+              </View>
               <Text style={{ color: "white" }}>{item.description}</Text>
             </View>
           )}
@@ -86,6 +93,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   child: {
+    flex: 1,
     backgroundColor: Colors.backgroundColor,
     padding: 16,
     alignItems: "center",
@@ -95,6 +103,11 @@ const styles = StyleSheet.create({
     width: "100%",
     margin: 16,
   },
+  videoPlayerHolder: {
+    flex: 1,
+    marginBottom: 15,
+    backgroundColor: 'white'
+  }
 });
 
 export default ExerciseAccordion;
