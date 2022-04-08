@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from "react-native";
-
 import VideoPlayer from "./VideoPlayer";
 
 import Colors from "../constants/Colors";
@@ -11,22 +10,6 @@ const ExerciseAccordion = (props) => {
     console.log("using effect");
   }, [props.expandedId]);
 
-  const resizedImage = (image) => {
-    const { width, height } = Image.resolveAssetSource(image);
-    const ratio = height / width;
-    const SCREEN_WIDTH = Dimensions.get("window").width;
-    return (
-      <Image
-        source={image}
-        style={{
-          width: SCREEN_WIDTH,
-          height: SCREEN_WIDTH * ratio,
-          marginBottom: 15,
-        }}
-        resizeMode="contain"
-      />
-    );
-  };
   const list = (exercises) => {
     let array = [];
     for (let exercise of exercises) {
@@ -56,10 +39,8 @@ const ExerciseAccordion = (props) => {
           <View style={styles.parentHr} />
           {item.id === props.expandedId && (
             <View style={styles.child}>
-              {/* {resizedImage(item.thumbnailPath)} */}
               <View style={styles.videoPlayerHolder}>
-              <VideoPlayer videoPath={item.videoPath}
-                thumbnailPath={item.thumbnailPath} />
+              <VideoPlayer videoPath={item.videoPath} />
               </View>
               <Text style={{ color: "white" }}>{item.description}</Text>
             </View>
