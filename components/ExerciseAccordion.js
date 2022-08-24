@@ -29,7 +29,7 @@ const ExerciseAccordion = (props) => {
               console.log(props.expandedId);
             }}
           >
-            <Text style={[styles.title, styles.font]}>{item.title}</Text>
+            <Text style={[styles.h2, styles.font]}>{item.title}</Text>
             <Icon
               name={item.id === props.expandedId ? "keyboard-arrow-up" : "keyboard-arrow-down"}
               size={30}
@@ -40,9 +40,17 @@ const ExerciseAccordion = (props) => {
           {item.id === props.expandedId && (
             <View style={styles.child}>
               <View style={styles.videoPlayerHolder}>
-              <VideoPlayer videoPath={item.videoPath} />
+                <VideoPlayer videoPath={item.videoPath} />
               </View>
-              <Text style={{ color: "white" }}>{item.description}</Text>
+              <Text style={styles.textHolder}>
+                <Text style={styles.h2}>Repetitions: </Text>
+                <Text style={styles.text}>{item.repetitions}</Text>
+              </Text>
+              <Text style={styles.textHolder}>
+                <Text style={styles.h2}>Hold: </Text>
+                <Text style={styles.text}>{item.duration} seconds</Text>
+              </Text>
+              <Text style={styles.text}>{item.description}</Text>
             </View>
           )}
         </View>
@@ -54,11 +62,6 @@ const ExerciseAccordion = (props) => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: Colors.white,
-  },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -77,17 +80,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.backgroundColor,
     padding: 16,
-    alignItems: "center",
-  },
-  image: {
-    height: 200,
-    width: "100%",
-    margin: 16,
   },
   videoPlayerHolder: {
     flex: 1,
     marginBottom: 15,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    alignItems: "center"
+  },
+  h2: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: Colors.white,
+  },
+  text: {
+    color: "white",
+  },
+  textHolder: {
+    marginBottom: 5
   }
 });
 

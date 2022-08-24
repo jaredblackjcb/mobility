@@ -26,5 +26,6 @@ const styles = StyleSheet.create({
     },
     video: {
       alignSelf: 'center',
+      backgroundColor: 'black'
     }
   });
